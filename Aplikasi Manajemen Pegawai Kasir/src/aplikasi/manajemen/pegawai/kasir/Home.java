@@ -58,7 +58,7 @@ public class Home extends JFrame implements ActionListener{
             new ViewPegawai();
         } else if (ae.getSource() == update) {
             setVisible(false);
-            new UpdateEmployee("");
+            new UpdateEmployee();
         } else {
             setVisible(false);
             new RemoveEmployee();
