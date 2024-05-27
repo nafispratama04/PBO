@@ -3,7 +3,7 @@ package aplikasi.manajemen.pegawai.kasir;
 import javax.swing.*;
 import java.awt.*;
 import java.sql.*;
-import.java.awt.event.*;
+import java.awt.event.*;
 
 public class RemoveEmployee extends JFrame implements ActionListener {
     
@@ -15,7 +15,7 @@ public class RemoveEmployee extends JFrame implements ActionListener {
         setLayout(null);
         
         JLabel labelempId = new JLabel("Employee Id");
-        labelempId.setBounds(50, 50, 100,30);
+        labelempId.setBounds(50, 50, 100, 30);
         add(labelempId);
         
         cEmpId = new Choice();
@@ -25,7 +25,7 @@ public class RemoveEmployee extends JFrame implements ActionListener {
         try {
             Conn c = new Conn();
             String query = "select * from employee";
-            ResultSet rs = c.s. executeQuery(query);
+            ResultSet rs = c.s.executeQuery(query);
             while(rs.next()) {
                 cEmpId.add(rs.getString("empId"));
             }
@@ -34,33 +34,33 @@ public class RemoveEmployee extends JFrame implements ActionListener {
         }
         
         JLabel labelname = new JLabel("Name");
-        labelname.setBounds(50, 100, 100,30);
+        labelname.setBounds(50, 100, 100, 30);
         add(labelname);
         
         JLabel lblname = new JLabel();
-        lblname.setBounds(200, 100, 100,30);
+        lblname.setBounds(200, 100, 100, 30);
         add(lblname);
         
         JLabel labelphone = new JLabel("Phone");
-        labelphone.setBounds(50, 150, 100,30);
+        labelphone.setBounds(50, 150, 100, 30);
         add(labelphone);
         
         JLabel lblphone = new JLabel();
-        lblphone.setBounds(200, 150, 100,30);
+        lblphone.setBounds(200, 150, 100, 30);
         add(lblphone);
         
         JLabel labelemail = new JLabel("Email");
-        labelemail.setBounds(50, 200, 100,30);
+        labelemail.setBounds(50, 200, 100, 30);
         add(labelemail);
         
         JLabel lblemail = new JLabel();
-        lblemail.setBounds(200, 200, 100,30);
+        lblemail.setBounds(200, 200, 100, 30);
         add(lblemail);
         
         try {
             Conn c = new Conn();
             String query = "select * from employee where empId = '"+cEmpId.getSelectedItem()+"'";
-            ResultSet rs = c.s. executeQuery(query);
+            ResultSet rs = c.s.executeQuery(query);
             while(rs.next()) {
                 lblname.setText(rs.getString("name"));
                 lblphone.setText(rs.getString("phone"));
@@ -70,12 +70,12 @@ public class RemoveEmployee extends JFrame implements ActionListener {
             e.printStackTrace();
         }
         
-        cEmpId.addItemListener(new ItemListener(){
+        cEmpId.addItemListener(new ItemListener() {
             public void itemStateChanged(ItemEvent ie) {
                 try {
                     Conn c = new Conn();
                     String query = "select * from employee where empId = '"+cEmpId.getSelectedItem()+"'";
-                    ResultSet rs = c.s. executeQuery(query);
+                    ResultSet rs = c.s.executeQuery(query);
                     while(rs.next()) {
                         lblname.setText(rs.getString("name"));
                         lblphone.setText(rs.getString("phone"));
@@ -88,20 +88,20 @@ public class RemoveEmployee extends JFrame implements ActionListener {
         });
         
         delete = new JButton("Delete");
-        delete.setBounds(80, 300, 100, 30);
+        delete.setBounds(80, 300, 100,30);
         delete.setBackground(Color.BLACK);
         delete.setForeground(Color.WHITE);
         delete.addActionListener(this);
         add(delete);
         
         back = new JButton("Back");
-        back.setBounds(220, 300, 100, 30);
+        back.setBounds(220, 300, 100,30);
         back.setBackground(Color.BLACK);
         back.setForeground(Color.WHITE);
         back.addActionListener(this);
         add(back);
         
-        ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icons/Delete.jpg"));
+        ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icons/delete.png"));
         Image i2 = i1.getImage().getScaledInstance(600, 400, Image.SCALE_DEFAULT);
         ImageIcon i3 = new ImageIcon(i2);
         JLabel image = new JLabel(i3);
@@ -117,20 +117,20 @@ public class RemoveEmployee extends JFrame implements ActionListener {
         if (ae.getSource() == delete) {
             try {
                 Conn c = new Conn();
-                String query = "delete from employee where empId = '"+cEmpId.getSelectedItem()+"'"
+                String query = "delete from employee where empId = '"+cEmpId.getSelectedItem()+"'";
                 c.s.executeUpdate(query);
-                JOptionPane.showMessage(null, "Employee Information Deleted Successfully");
+                JOptionPane.showMessageDialog(null, "Employee Information Deleted Sucessfully");
                 setVisible(false);
-                new Home();   
+                new Home();
             } catch (Exception e) {
                 e.printStackTrace();
             }
         } else {
-            setVisible(true);
+            setVisible(false);
             new Home();
         }
     }
-    
+
     public static void main(String[] args) {
         new RemoveEmployee();
     }

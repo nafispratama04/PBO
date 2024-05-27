@@ -5,39 +5,41 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class Home extends JFrame implements ActionListener{
-    
+
     JButton view, add, update, remove;
     
-    Home(){
+    Home() {
+        
         setLayout(null);
-        ImageIcon il = new ImageIconLoader(ClassLoader.getSystemResource("icons/home.jpg"));
-        Image i2 - il.getImage().getScaledInstance(1120, 630, Image.SCALE_DEFAULT);
+        
+        ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icons/home.jpg"));
+        Image i2 = i1.getImage().getScaledInstance(1120, 630, Image.SCALE_DEFAULT);
         ImageIcon i3 = new ImageIcon(i2);
         JLabel image = new JLabel(i3);
         image.setBounds(0, 0, 1120, 630);
         add(image);
         
-        JLabel heading = new JLabel("Manajemen Pegawai Kasir");
-        heading.setBounds(620,20,400,40);
+        JLabel heading = new JLabel("Employee Management System");
+        heading.setBounds(620, 20, 400, 40);
         heading.setFont(new Font("Raleway", Font.BOLD, 25));
         image.add(heading);
         
-        add = new JButton("Tambah Pegawai");
+        add = new JButton("Add Employee");
         add.setBounds(650, 80, 150, 40);
         add.addActionListener(this);
         image.add(add);
         
-        view = new JButton("Lihat Pegawai");
+        view = new JButton("View Employees");
         view.setBounds(820, 80, 150, 40);
         view.addActionListener(this);
         image.add(view);
         
-        update = new JButton("Update Pegawai");
+        update = new JButton("Update Employee");
         update.setBounds(650, 140, 150, 40);
         update.addActionListener(this);
         image.add(update);
         
-        remove = new JButton("Hapus Pegawai");
+        remove = new JButton("Remove Employee");
         remove.setBounds(820, 140, 150, 40);
         remove.addActionListener(this);
         image.add(remove);
@@ -47,19 +49,23 @@ public class Home extends JFrame implements ActionListener{
         setVisible(true);
     }
     
-    public static void actionPerformed(ActionEvent ae){
-        if(ae.getSource() -- add){
-        
-        }else if(ae.getSource -- view){
-        
-        }else if(ae.getSource() -- update){
-        
-        }else{
-                
+    public void actionPerformed(ActionEvent ae) {
+        if (ae.getSource() == add) {
+            setVisible(false);
+            new AddPegawai();
+        } else if (ae.getSource() == view) {
+            setVisible(false);
+            new ViewPegawai();
+        } else if (ae.getSource() == update) {
+            setVisible(false);
+            new UpdateEmployee("");
+        } else {
+            setVisible(false);
+            new RemoveEmployee();
         }
     }
-    
-    public static void main(String[] args){
+
+    public static void main(String[] args) {
         new Home();
-    } 
+    }
 }

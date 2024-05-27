@@ -1,4 +1,3 @@
-
 package aplikasi.manajemen.pegawai.kasir;
 
 import java.awt.*;
@@ -7,148 +6,149 @@ import com.toedter.calendar.JDateChooser;
 import java.util.*;
 import java.awt.event.*;
 
-/**
- *
- * @author bagus
- */
 public class AddPegawai extends JFrame implements ActionListener{
-    
-    JTextField tfname, tffname, tfaddress, tfphone, tfemail, tfsalary;
     
     Random ran = new Random();
     int number = ran.nextInt(999999);
     
-    
+    JTextField tfname, tffname, tfaddress, tfphone, tfaadhar, tfemail, tfsalary, tfdesignation;
     JDateChooser dcdob;
-    JComboBox edu;
+    JComboBox cbeducation;
     JLabel lblempId;
     JButton add, back;
     
-     AddPegawai(){
+    AddPegawai() {
         getContentPane().setBackground(Color.WHITE);
         setLayout(null);
         
-        //Heading
         JLabel heading = new JLabel("Add Employee Detail");
         heading.setBounds(320, 30, 500, 50);
         heading.setFont(new Font("SAN_SERIF", Font.BOLD, 25));
         add(heading);
         
-        //Nama
-        JLabel labelname = new JLabel("Nama");
+        JLabel labelname = new JLabel("Name");
         labelname.setBounds(50, 150, 150, 30);
-        labelname.setFont( new Font("Serif", Font.PLAIN, 20));
+        labelname.setFont(new Font("serif", Font.PLAIN, 20));
         add(labelname);
         
-        JTextField tfname = new JTextField();
+        tfname = new JTextField();
         tfname.setBounds(200, 150, 150, 30);
         add(tfname);
         
-        //Nama2
-        JLabel labelfname = new JLabel("Nama2");
+        JLabel labelfname = new JLabel("Father's Name");
         labelfname.setBounds(400, 150, 150, 30);
-        labelfname.setFont( new Font("Serif", Font.PLAIN, 20));
+        labelfname.setFont(new Font("serif", Font.PLAIN, 20));
         add(labelfname);
         
-        JTextField tffname = new JTextField();
+        tffname = new JTextField();
         tffname.setBounds(600, 150, 150, 30);
         add(tffname);
         
-        //TTL
-        JLabel labeltl = new JLabel("Tanggal Lahir");
-        labeltl.setBounds(50, 200, 150, 30);
-        labeltl.setFont( new Font("Serif", Font.PLAIN, 20));
-        add(labeltl);
+        JLabel labeldob = new JLabel("Date of Birth");
+        labeldob.setBounds(50, 200, 150, 30);
+        labeldob.setFont(new Font("serif", Font.PLAIN, 20));
+        add(labeldob);
         
-        JDateChooser dcdob = new JDateChooser();
+        dcdob = new JDateChooser();
         dcdob.setBounds(200, 200, 150, 30);
         add(dcdob);
         
-        //Gaji
-        JLabel labelsalary = new JLabel("Gaji");
+        JLabel labelsalary = new JLabel("Salary");
         labelsalary.setBounds(400, 200, 150, 30);
         labelsalary.setFont(new Font("serif", Font.PLAIN, 20));
         add(labelsalary);
         
-        JTextField tfsalary = new JTextField();
+        tfsalary = new JTextField();
         tfsalary.setBounds(600, 200, 150, 30);
         add(tfsalary);
         
-        //Alamat
-        JLabel labeladdress = new JLabel("Alamat");
+        JLabel labeladdress = new JLabel("Address");
         labeladdress.setBounds(50, 250, 150, 30);
         labeladdress.setFont(new Font("serif", Font.PLAIN, 20));
         add(labeladdress);
         
-        JTextField tfaddress = new JTextField();
+        tfaddress = new JTextField();
         tfaddress.setBounds(200, 250, 150, 30);
         add(tfaddress);
         
-        //Telp
-        JLabel labelphone = new JLabel("No. Telp");
+        JLabel labelphone = new JLabel("Phone");
         labelphone.setBounds(400, 250, 150, 30);
         labelphone.setFont(new Font("serif", Font.PLAIN, 20));
         add(labelphone);
         
-        JTextField tfphone = new JTextField();
+        tfphone = new JTextField();
         tfphone.setBounds(600, 250, 150, 30);
         add(tfphone);
         
-        //Email
         JLabel labelemail = new JLabel("Email");
         labelemail.setBounds(50, 300, 150, 30);
         labelemail.setFont(new Font("serif", Font.PLAIN, 20));
         add(labelemail);
         
-        JTextField tfemail = new JTextField();
+        tfemail = new JTextField();
         tfemail.setBounds(200, 300, 150, 30);
         add(tfemail);
         
-        //Riwayat Pendidikan
-        JLabel labeleducation = new JLabel("Pendidikan Terakhir");
-        labeleducation.setBounds(400, 300, 200, 30);
+        JLabel labeleducation = new JLabel("Higest Education");
+        labeleducation.setBounds(400, 300, 150, 30);
         labeleducation.setFont(new Font("serif", Font.PLAIN, 20));
         add(labeleducation);
         
-        String courses[] = {"SD", "SMP", "SMA", "S1", "D3", "D4"};
-        JComboBox edu = new JComboBox(courses);
-        edu.setBounds(600, 300, 150, 30);
-        add(edu);
+        String courses[] = {"BBA", "BCA", "BA", "BSC", "B.COM", "BTech", "MBA", "MCA", "MA", "MTech", "MSC", "PHD"};
+        cbeducation = new JComboBox(courses);
+        cbeducation.setBackground(Color.WHITE);
+        cbeducation.setBounds(600, 300, 150, 30);
+        add(cbeducation);
         
-        JLabel labelempId = new JLabel("ID Pegawai");
-        labelempId.setBounds(50, 350, 150, 30);
+        JLabel labeldesignation = new JLabel("Designation");
+        labeldesignation.setBounds(50, 350, 150, 30);
+        labeldesignation.setFont(new Font("serif", Font.PLAIN, 20));
+        add(labeldesignation);
+        
+        tfdesignation = new JTextField();
+        tfdesignation.setBounds(200, 350, 150, 30);
+        add(tfdesignation);
+        
+        JLabel labelaadhar = new JLabel("Aadhar Number");
+        labelaadhar.setBounds(400, 350, 150, 30);
+        labelaadhar.setFont(new Font("serif", Font.PLAIN, 20));
+        add(labelaadhar);
+        
+        tfaadhar = new JTextField();
+        tfaadhar.setBounds(600, 350, 150, 30);
+        add(tfaadhar);
+        
+        JLabel labelempId = new JLabel("Employee id");
+        labelempId.setBounds(50, 400, 150, 30);
         labelempId.setFont(new Font("serif", Font.PLAIN, 20));
         add(labelempId);
         
-        JLabel lblempId = new JLabel("" + number);
-        lblempId.setBounds(200, 350, 150, 30);
+        lblempId = new JLabel("" + number);
+        lblempId.setBounds(200, 400, 150, 30);
         lblempId.setFont(new Font("serif", Font.PLAIN, 20));
         add(lblempId);
         
-        JButton add = new JButton("Add");
+        add = new JButton("Add Details");
         add.setBounds(250, 550, 150, 40);
         add.addActionListener(this);
         add.setBackground(Color.BLACK);
         add.setForeground(Color.WHITE);
         add(add);
         
-        JButton back = new JButton("Back");
+        back = new JButton("Back");
         back.setBounds(450, 550, 150, 40);
         back.addActionListener(this);
         back.setBackground(Color.BLACK);
         back.setForeground(Color.WHITE);
         add(back);
         
-        
-        
-        
-         setSize(900, 700);
-         setLocation(300, 50);
-         setVisible(true);
-    }  
+        setSize(900, 700);
+        setLocation(300, 50);
+        setVisible(true);
+    }
     
     public void actionPerformed(ActionEvent ae) {
-        if (ae.getSource() == add ) {
+        if (ae.getSource() == add) {
             String name = tfname.getText();
             String fname = tffname.getText();
             String dob = ((JTextField) dcdob.getDateEditor().getUiComponent()).getText();
@@ -156,25 +156,27 @@ public class AddPegawai extends JFrame implements ActionListener{
             String address = tfaddress.getText();
             String phone = tfphone.getText();
             String email = tfemail.getText();
-            String education = (String) edu.getSelectedItem();
+            String education = (String) cbeducation.getSelectedItem();
+            String designation = tfdesignation.getText();
+            String aadhar = tfaadhar.getText();
             String empId = lblempId.getText();
             
             try {
                 Conn conn = new Conn();
-                String query = "insert into employee values('"+name+"', '"+fname+"', '"+dob+"', '"+salary+"', '"+address+"', '"+phone+"', '"+email+"', '"+education+"', '"+empId+"')";
+                String query = "insert into employee values('"+name+"', '"+fname+"', '"+dob+"', '"+salary+"', '"+address+"', '"+phone+"', '"+email+"', '"+education+"', '"+designation+"', '"+aadhar+"', '"+empId+"')";
                 conn.s.executeUpdate(query);
-                JOptionPane.showMessageDialog(null, "Pegawai Berhasil Ditambahkan");
+                JOptionPane.showMessageDialog(null, "Details added successfully");
                 setVisible(false);
                 new Home();
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }  else {
+        } else {
             setVisible(false);
             new Home();
         }
-    } 
-     
+    }
+
     public static void main(String[] args) {
         new AddPegawai();
     }

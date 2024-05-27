@@ -6,54 +6,49 @@ import java.sql.*;
 import net.proteanit.sql.DbUtils;
 import java.awt.event.*;
 
-
-/**
- *
- * @author bagus
- */
 public class ViewPegawai extends JFrame implements ActionListener{
-    
+
     JTable table;
     Choice cemployeeId;
     JButton search, print, update, back;
     
-    ViewPegawai(){
-    
-    getContentPane().setBackground(Color.WHITE);
-    setLayout(null);
-    
-    JLabel searchlbl = new JLabel("Search by ID Pegawai");
-    searchlbl.setBounds(20, 20, 150, 20);
-    add(searchlbl);
-    
-    cemployeeId = new Choice();
-    cemployeeId.setBounds(180, 20, 150, 20);
-    add(cemployeeId);
+    ViewPegawai() {
         
-    try {
+        getContentPane().setBackground(Color.WHITE);
+        setLayout(null);
+        
+        JLabel searchlbl = new JLabel("Search by Employee Id");
+        searchlbl.setBounds(20, 20, 150, 20);
+        add(searchlbl);
+        
+        cemployeeId = new Choice();
+        cemployeeId.setBounds(180, 20, 150, 20);
+        add(cemployeeId);
+        
+        try {
             Conn c = new Conn();
             ResultSet rs = c.s.executeQuery("select * from employee");
             while(rs.next()) {
-            cemployeeId.add(rs.getString("empId"));
-        }
-    } catch (Exception e) {
+                cemployeeId.add(rs.getString("empId"));
+            }
+        } catch (Exception e) {
             e.printStackTrace();
-    }
-    
-    table = new JTable();
-    
-    try {
-        Conn c = new Conn();
-        ResultSet rs = c.s.executeQuery("select * from employee");
-        table.setModel(DbUtils.resultSetToTableModel(rs));
-    } catch (Exception m) {
-        e.printStackTrace();
-    }
-    
-    JScrollPage jsp = new JScrollPage(table);
-    jsp.setBounds(0, 100, 900, 600);
-    add(jsp);
-    
+        }
+        
+        table = new JTable();
+        
+        try {
+            Conn c = new Conn();
+            ResultSet rs = c.s.executeQuery("select * from employee");
+            table.setModel(DbUtils.resultSetToTableModel(rs));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        JScrollPane jsp = new JScrollPane(table);
+        jsp.setBounds(0, 100, 900, 600);
+        add(jsp);
+        
         search = new JButton("Search");
         search.setBounds(20, 70, 80, 20);
         search.addActionListener(this);
@@ -73,34 +68,29 @@ public class ViewPegawai extends JFrame implements ActionListener{
         back.setBounds(320, 70, 80, 20);
         back.addActionListener(this);
         add(back);
-    
-    
-    
-    
-    setSize(900, 700);
-    setLocation(300, 100);
-    setVisible(true);
         
+        setSize(900, 700);
+        setLocation(300, 100);
+        setVisible(true);
     }
     
-    public void actionPerformed(ActionEvent ae){
-        if(ae.getSource() == search){
+    public void actionPerformed(ActionEvent ae) {
+        if (ae.getSource() == search) {
             String query = "select * from employee where empId = '"+cemployeeId.getSelectedItem()+"'";
             try {
                 Conn c = new Conn();
                 ResultSet rs = c.s.executeQuery(query);
                 table.setModel(DbUtils.resultSetToTableModel(rs));
-            } catch(Eception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
-            
-        } else if(ae.getSource() == print){
+        } else if (ae.getSource() == print) {
             try {
                 table.print();
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        } else if(ae.getSource() == update){
+        } else if (ae.getSource() == update) {
             setVisible(false);
             new UpdateEmployee(cemployeeId.getSelectedItem());
         } else {
@@ -108,9 +98,8 @@ public class ViewPegawai extends JFrame implements ActionListener{
             new Home();
         }
     }
-    
-    public static void main(String[] args){
-        new ViewEmployee();
+
+    public static void main(String[] args) {
+        new ViewPegawai();
     }
-    
 }
