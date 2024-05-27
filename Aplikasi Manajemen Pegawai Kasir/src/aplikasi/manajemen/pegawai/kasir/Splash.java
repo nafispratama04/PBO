@@ -17,7 +17,7 @@ public class Splash extends JFrame implements ActionListener {
         heading.setForeground(Color.RED);
         add(heading);
         
-        ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icons/front.jpg"));
+        ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icons/Background App.jpg"));
         Image i2 = i1.getImage().getScaledInstance(1100, 700, Image.SCALE_DEFAULT);
         ImageIcon i3 = new ImageIcon(i2);
         JLabel image = new JLabel(i3);
