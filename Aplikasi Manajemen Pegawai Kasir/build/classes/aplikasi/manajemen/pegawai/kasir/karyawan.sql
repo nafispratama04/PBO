@@ -28,13 +28,13 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `akun` (
-  `No_telp` varchar(100) NOT NULL,
-  `Username` varchar(100) DEFAULT NULL,
-  `Password_` varchar(100) DEFAULT NULL,
-  `Nama` varchar(100) DEFAULT NULL,
-  `email` varchar(100) NOT NULL,
-  `NIK` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `No_telp` VARCHAR(100) NOT NULL,
+  `Username` VARCHAR(100) DEFAULT NULL,
+  `Password_` VARCHAR(100) DEFAULT NULL,
+  `Nama` VARCHAR(100) DEFAULT NULL,
+  `email` VARCHAR(100) NOT NULL,
+  `NIK` VARCHAR(100) DEFAULT NULL
+) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Indexes for dumped tables
@@ -51,3 +51,16 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+CREATE TABLE PegawaiKasir (
+    ID INT PRIMARY KEY AUTO_INCREMENT,
+    Nama VARCHAR(100) NOT NULL,
+    NomorPegawai VARCHAR(20) NOT NULL,
+    TempatLahir VARCHAR(100) NOT NULL,
+    TanggalLahir DATE NOT NULL,
+    Alamat TEXT NOT NULL,
+    NomorTelepon VARCHAR(20) NOT NULL,
+    Email VARCHAR(100),
+    Gaji DECIMAL(10, 2) NOT NULL,
+    TanggalMulai DATE NOT NULL
+);

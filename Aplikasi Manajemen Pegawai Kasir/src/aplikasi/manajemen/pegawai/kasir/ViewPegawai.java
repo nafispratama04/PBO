@@ -17,19 +17,20 @@ public class ViewPegawai extends JFrame implements ActionListener{
         getContentPane().setBackground(Color.WHITE);
         setLayout(null);
         
-        JLabel searchlbl = new JLabel("Search by Employee Id");
-        searchlbl.setBounds(20, 20, 150, 20);
+        JLabel searchlbl = new JLabel("Cari berdasarkan Nomor Pegawai");
+        searchlbl.setBounds(20, 20, 200, 20);
         add(searchlbl);
         
         cemployeeId = new Choice();
-        cemployeeId.setBounds(180, 20, 150, 20);
+        cemployeeId.setBounds(230, 20, 150, 20);
         add(cemployeeId);
         
         try {
-            Conn c = new Conn();
-            ResultSet rs = c.s.executeQuery("select * from employee");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/karyawan", "root", "");
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery("SELECT NomorPegawai FROM PegawaiKasir");
             while(rs.next()) {
-                cemployeeId.add(rs.getString("empId"));
+                cemployeeId.add(rs.getString("NomorPegawai"));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -38,8 +39,9 @@ public class ViewPegawai extends JFrame implements ActionListener{
         table = new JTable();
         
         try {
-            Conn c = new Conn();
-            ResultSet rs = c.s.executeQuery("select * from employee");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/namadatabase", "username", "password");
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery("SELECT * FROM PegawaiKasir");
             table.setModel(DbUtils.resultSetToTableModel(rs));
         } catch (Exception e) {
             e.printStackTrace();
@@ -76,10 +78,11 @@ public class ViewPegawai extends JFrame implements ActionListener{
     
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == search) {
-            String query = "select * from employee where empId = '"+cemployeeId.getSelectedItem()+"'";
+            String query = "SELECT * FROM PegawaiKasir WHERE NomorPegawai = '"+cemployeeId.getSelectedItem()+"'";
             try {
-                Conn c = new Conn();
-                ResultSet rs = c.s.executeQuery(query);
+                Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/karyawan", "root", "");
+                Statement st = conn.createStatement();
+                ResultSet rs = st.executeQuery(query);
                 table.setModel(DbUtils.resultSetToTableModel(rs));
             } catch (Exception e) {
                 e.printStackTrace();

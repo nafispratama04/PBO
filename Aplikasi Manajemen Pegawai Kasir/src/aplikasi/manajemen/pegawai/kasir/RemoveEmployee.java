@@ -14,7 +14,7 @@ public class RemoveEmployee extends JFrame implements ActionListener {
         getContentPane().setBackground(Color.WHITE);
         setLayout(null);
         
-        JLabel labelempId = new JLabel("Employee Id");
+        JLabel labelempId = new JLabel("Nomor Pegawai");
         labelempId.setBounds(50, 50, 100, 30);
         add(labelempId);
         
@@ -23,17 +23,18 @@ public class RemoveEmployee extends JFrame implements ActionListener {
         add(cEmpId);
         
         try {
-            Conn c = new Conn();
-            String query = "select * from employee";
-            ResultSet rs = c.s.executeQuery(query);
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/karyawan", "root", "");
+            String query = "select * from PegawaiKasir";
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(query);
             while(rs.next()) {
-                cEmpId.add(rs.getString("empId"));
+                cEmpId.add(rs.getString("NomorPegawai"));
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
         
-        JLabel labelname = new JLabel("Name");
+        JLabel labelname = new JLabel("Nama");
         labelname.setBounds(50, 100, 100, 30);
         add(labelname);
         
@@ -41,7 +42,7 @@ public class RemoveEmployee extends JFrame implements ActionListener {
         lblname.setBounds(200, 100, 100, 30);
         add(lblname);
         
-        JLabel labelphone = new JLabel("Phone");
+        JLabel labelphone = new JLabel("Telepon");
         labelphone.setBounds(50, 150, 100, 30);
         add(labelphone);
         
@@ -58,13 +59,14 @@ public class RemoveEmployee extends JFrame implements ActionListener {
         add(lblemail);
         
         try {
-            Conn c = new Conn();
-            String query = "select * from employee where empId = '"+cEmpId.getSelectedItem()+"'";
-            ResultSet rs = c.s.executeQuery(query);
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/karyawan", "root", "");
+            String query = "select * from PegawaiKasir where NomorPegawai = '"+cEmpId.getSelectedItem()+"'";
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(query);
             while(rs.next()) {
-                lblname.setText(rs.getString("name"));
-                lblphone.setText(rs.getString("phone"));
-                lblemail.setText(rs.getString("email"));
+                lblname.setText(rs.getString("Nama"));
+                lblphone.setText(rs.getString("NomorTelepon"));
+                lblemail.setText(rs.getString("Email"));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -73,13 +75,14 @@ public class RemoveEmployee extends JFrame implements ActionListener {
         cEmpId.addItemListener(new ItemListener() {
             public void itemStateChanged(ItemEvent ie) {
                 try {
-                    Conn c = new Conn();
-                    String query = "select * from employee where empId = '"+cEmpId.getSelectedItem()+"'";
-                    ResultSet rs = c.s.executeQuery(query);
+                    Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/karyawan", "root", "");
+                    String query = "select * from PegawaiKasir where NomorPegawai = '"+cEmpId.getSelectedItem()+"'";
+                    Statement st = conn.createStatement();
+                    ResultSet rs = st.executeQuery(query);
                     while(rs.next()) {
-                        lblname.setText(rs.getString("name"));
-                        lblphone.setText(rs.getString("phone"));
-                        lblemail.setText(rs.getString("email"));
+                        lblname.setText(rs.getString("Nama"));
+                        lblphone.setText(rs.getString("NomorTelepon"));
+                        lblemail.setText(rs.getString("Email"));
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -87,15 +90,15 @@ public class RemoveEmployee extends JFrame implements ActionListener {
             }
         });
         
-        delete = new JButton("Delete");
-        delete.setBounds(80, 300, 100,30);
+        delete = new JButton("Hapus");
+        delete.setBounds(80, 250, 100,30);
         delete.setBackground(Color.BLACK);
         delete.setForeground(Color.WHITE);
         delete.addActionListener(this);
         add(delete);
         
-        back = new JButton("Back");
-        back.setBounds(220, 300, 100,30);
+        back = new JButton("Kembali");
+        back.setBounds(220, 250, 100,30);
         back.setBackground(Color.BLACK);
         back.setForeground(Color.WHITE);
         back.addActionListener(this);
@@ -116,10 +119,11 @@ public class RemoveEmployee extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == delete) {
             try {
-                Conn c = new Conn();
-                String query = "delete from employee where empId = '"+cEmpId.getSelectedItem()+"'";
-                c.s.executeUpdate(query);
-                JOptionPane.showMessageDialog(null, "Employee Information Deleted Sucessfully");
+                Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/karyawan", "root", "");
+                String query = "delete from PegawaiKasir where NomorPegawai = '"+cEmpId.getSelectedItem()+"'";
+                Statement st = conn.createStatement();
+                st.executeUpdate(query);
+                JOptionPane.showMessageDialog(null, "Informasi Pegawai Telah Dihapus");
                 setVisible(false);
                 new Home();
             } catch (Exception e) {
