@@ -4,16 +4,15 @@
  */
 package aplikasi.manajemen.pegawai.kasir;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import javax.swing.JOptionPane;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.sql.*;
 /**
  *
  * @author user
  */
-public class Login extends javax.swing.JFrame {
+public class Login extends JFrame implements ActionListener{
 
     /**
      * Creates new form Login
@@ -140,79 +139,46 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_UsernameActionPerformed
 
     private void LoginbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginbuttonActionPerformed
-        String username = Username.getText();
-        String password = new String(jPassword.getPassword());
-        
-        // Koneksi ke database
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
-        
-        try {
-            // Load the JDBC driver
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            
-            // Koneksi ke database
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/karyawan", "root", "password");
-            
-            // SQL query
-            String sql = "SELECT * FROM users WHERE username = ? AND password = ?";
-            preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, username);
-            preparedStatement.setString(2, password);
-            
-            resultSet = preparedStatement.executeQuery();
-            
-            if(resultSet.next()) {
-                JOptionPane.showMessageDialog(this, "Login Successful");
-                // Navigate to another form or main application
-            } else {
-                JOptionPane.showMessageDialog(this, "Invalid Username or Password", "Login Failed", JOptionPane.ERROR_MESSAGE);
-            }
-            
-        } catch (Exception e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Database Connection Failed", "Error", JOptionPane.ERROR_MESSAGE);
-        } finally {
-            try {
-                if(resultSet != null) resultSet.close();
-                if(preparedStatement != null) preparedStatement.close();
-                if(connection != null) connection.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
+        actionPerformed(evt);
     }//GEN-LAST:event_LoginbuttonActionPerformed
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+       try {
+            String username = Username.getText();
+            String password = new String(jPassword.getPassword());
+
+            Conn c = new Conn();
+            String query = "SELECT * FROM akun WHERE Username = ? AND Password_ = ?";
+
+            PreparedStatement pstmt = c.c.prepareStatement(query);
+            pstmt.setString(1, username);
+            pstmt.setString(2, password);
+
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                setVisible(false);
+                Home home = new Home();
+                home.show();
+                // Proceed to the next screen or perform the desired action after successful login
+            } else {
+                JOptionPane.showMessageDialog(null, "Invalid username or password");
+                setVisible(true);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            } catch (ClassNotFoundException ex) {
-                java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-            } catch (InstantiationException ex) {
-                java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-            } catch (IllegalAccessException ex) {
-                java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-            } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-                java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-            }
-        //</editor-fold>
-
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Login().setVisible(true);
             }
         });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Loginbutton;
     private javax.swing.JTextField Username;
@@ -223,4 +189,5 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPasswordField jPassword;
     // End of variables declaration//GEN-END:variables
+
 }

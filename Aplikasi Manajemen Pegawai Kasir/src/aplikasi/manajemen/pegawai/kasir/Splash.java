@@ -55,7 +55,7 @@ public class Splash extends JFrame implements ActionListener {
     
     public void actionPerformed(ActionEvent ae) {
         setVisible(false);
-        new Login();
+        new Login().setVisible(true);
     }
     
     public static void main(String args[]) {
