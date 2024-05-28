@@ -55,7 +55,7 @@ COMMIT;
 CREATE TABLE PegawaiKasir (
     ID INT PRIMARY KEY AUTO_INCREMENT,
     Nama VARCHAR(100) NOT NULL,
-    NomorPegawai VARCHAR(20) NOT NULL,
+    NomorPegawai VARCHAR(20) NOT NULL UNIQUE,
     TempatLahir VARCHAR(100) NOT NULL,
     TanggalLahir DATE NOT NULL,
     Alamat TEXT NOT NULL,
@@ -63,4 +63,19 @@ CREATE TABLE PegawaiKasir (
     Email VARCHAR(100),
     Gaji DECIMAL(10, 2) NOT NULL,
     TanggalMulai DATE NOT NULL
-);
+) ENGINE=INNODB;
+
+CREATE TABLE JadwalKerja (
+    ID INT PRIMARY KEY AUTO_INCREMENT,
+    NomorPegawai VARCHAR(20) NOT NULL,
+    HariKerja VARCHAR(50),
+    FOREIGN KEY (NomorPegawai) REFERENCES PegawaiKasir(NomorPegawai)
+) ENGINE=INNODB;
+
+CREATE TABLE JadwalPelatihan (
+    ID INT PRIMARY KEY AUTO_INCREMENT,
+    NomorPegawai VARCHAR(20) NOT NULL,
+    MingguPelatihan VARCHAR(50),
+    TopikPelatihan VARCHAR(100),
+    FOREIGN KEY (NomorPegawai) REFERENCES PegawaiKasir(NomorPegawai)
+) ENGINE=INNODB;
