@@ -79,3 +79,12 @@ CREATE TABLE JadwalPelatihan (
     TopikPelatihan VARCHAR(100),
     FOREIGN KEY (NomorPegawai) REFERENCES PegawaiKasir(NomorPegawai)
 ) ENGINE=INNODB;
+
+CREATE TABLE AbsensiPegawai (
+    ID INT PRIMARY KEY AUTO_INCREMENT,
+    NomorPegawai VARCHAR(20) NOT NULL,
+    Tanggal DATE NOT NULL,
+    Hari VARCHAR(10) NOT NULL,
+    KeteranganAbsensi VARCHAR(20) NOT NULL,
+    FOREIGN KEY (NomorPegawai) REFERENCES PegawaiKasir(NomorPegawai)
+) ENGINE=INNODB;
