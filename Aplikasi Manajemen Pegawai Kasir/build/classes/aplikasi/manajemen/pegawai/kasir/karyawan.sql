@@ -88,3 +88,14 @@ CREATE TABLE AbsensiPegawai (
     KeteranganAbsensi VARCHAR(20) NOT NULL,
     FOREIGN KEY (NomorPegawai) REFERENCES PegawaiKasir(NomorPegawai)
 ) ENGINE=INNODB;
+
+CREATE TABLE GajiPembayaran (
+    ID INT PRIMARY KEY AUTO_INCREMENT,
+    NomorPegawai VARCHAR(20) NOT NULL,
+    BulanTahun VARCHAR(20) NOT NULL,
+    GajiDasar DECIMAL(10, 2) NOT NULL,
+    PersentaseKehadiran DECIMAL(5, 2) NOT NULL,
+    GajiDibayar DECIMAL(10, 2) NOT NULL,
+    TanggalPembayaran DATE NOT NULL,
+    FOREIGN KEY (NomorPegawai) REFERENCES PegawaiKasir(NomorPegawai)
+) ENGINE=INNODB;
