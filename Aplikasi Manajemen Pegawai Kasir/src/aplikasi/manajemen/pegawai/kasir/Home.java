@@ -109,7 +109,7 @@ public class Home extends JFrame implements ActionListener {
             new SalaryPayment();
         } else if (ae.getSource() == logout) {
             setVisible(false);
-            new Login();
+            new Login().setVisible(true);
         }
     }
     
